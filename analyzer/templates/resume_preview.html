@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Resume Preview</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+
+body{
+background:#f4f6f9;
+font-family:Segoe UI;
+}
+
+.resume{
+background:white;
+max-width:800px;
+margin:auto;
+padding:40px;
+box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+.section{
+margin-top:25px;
+}
+
+h1{
+font-size:28px;
+font-weight:700;
+}
+
+h4{
+border-bottom:2px solid #eee;
+padding-bottom:5px;
+margin-bottom:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="resume">
+
+
+<!-- HEADER -->
+
+<h1>{{name}}</h1>
+
+<p>
+{{email}} | {{phone}}
+{% if github %} | {{github}} {% endif %}
+{% if linkedin %} | {{linkedin}} {% endif %}
+</p>
+
+
+<!-- OBJECTIVE -->
+
+{% if objective %}
+<div class="section">
+
+<h4>Objective</h4>
+
+<p>{{objective}}</p>
+
+</div>
+{% endif %}
+
+
+<!-- SKILLS -->
+
+{% if skills %}
+<div class="section">
+
+<h4>Skills</h4>
+
+<ul>
+
+{% for skill in skills %}
+{% if skill %}
+<li>{{skill}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+
+<!-- EDUCATION -->
+
+{% if education %}
+<div class="section">
+
+<h4>Education</h4>
+
+{% for c,d,y,p in education %}
+<div style="margin-bottom:18px;">
+
+    <!-- LINE 1: College + Year -->
+    <div style="display:flex; justify-content:space-between;">
+        <strong style="color:#111;">{{c}}</strong>
+        <span style="color:#9ca3af; font-size:13px;">{{y}}</span>
+    </div>
+
+    <!-- LINE 2: Degree + CGPA -->
+    <div style="display:flex; justify-content:space-between; margin-top:3px;">
+        <span style="color:#6b7280;">{{d}}</span>
+{% if "." in p %}
+<strong>CGPA: {{p}}</strong>
+{% else %}
+<strong>Percentage: {{p}}</strong>
+{% endif %}
+</div>
+
+{% endfor %}
+
+</div>
+{% endif %}
+
+<!-- EXPERIENCE -->
+{% if experience %}
+<div class="section">
+
+<h4>Experience</h4>
+
+{% for c,r,d,desc in experience %}
+
+{% if c == "Freshers" or c == "Fresher" %}
+
+<p><strong>Fresher – Open to internships and entry-level opportunities</strong></p>
+
+{% elif c or r or desc %}
+
+<p><strong>{{r}}</strong> - {{c}} ({{d}})</p>
+
+{% if desc %}
+<p>{{desc}}</p>
+{% endif %}
+
+<br>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+{% endif %}
+
+<!-- PROJECTS -->
+
+{% if projects %}
+<div class="section">
+
+<h4>Projects</h4>
+
+{% for n,d,l in projects %}
+
+{% if n %}
+
+<p><strong>{{n}}</strong></p>
+
+{% if d %}
+<p>{{d}}</p>
+{% endif %}
+
+{% if l %}
+<p>{{l}}</p>
+{% endif %}
+
+<br>
+
+{% endif %}
+
+{% endfor %}
+
+</div>
+{% endif %}
+
+
+<!-- CERTIFICATES -->
+
+{% if certificates %}
+<div class="section">
+
+<h4>Certificates</h4>
+
+<ul>
+
+{% for c in certificates %}
+{% if c %}
+<li>{{c}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+
+<!-- ACHIEVEMENTS -->
+
+{% if achievements|join:'' %}
+<div class="section">
+
+<h4>Achievements</h4>
+
+<ul>
+
+{% for a in achievements %}
+{% if a %}
+<li>{{a}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+
+
+<!-- LANGUAGES -->
+
+{% if languages|join:'' %}
+<div class="section">
+
+<h4>Languages</h4>
+
+<ul>
+
+{% for l in languages %}
+{% if l %}
+<li>{{l}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+
+<!-- INTERESTS -->
+
+{% if interests|join:'' %}
+<div class="section">
+
+<h4>Interests</h4>
+
+<ul>
+
+{% for i in interests %}
+{% if i %}
+<li>{{i}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+
+<!-- LINKS -->
+
+{% if links|join:'' %}
+<div class="section">
+
+<h4>Portfolio Links</h4>
+
+<ul>
+
+{% for link in links|join:'' %}
+{% if link %}
+<li>{{link}}</li>
+{% endif %}
+{% endfor %}
+
+</ul>
+
+</div>
+{% endif %}
+
+</div>
+
+</body>
+</html>
